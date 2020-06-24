@@ -1,0 +1,41 @@
+.modal {
+    position: fixed;
+    z-index: 500;
+    background-color: white;
+    max-width:620px;
+    width: 80%;
+    text-align: left;
+    padding: 30px 30px;
+    left: calc(50% - 310px);
+    top: 20%;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+    overflow: hidden;
+    max-height: 90vh;
+    border: 5px solid #263238;
+}
+
+.modal h2 {
+    margin-top: 0;
+}
+
+.closeButton {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    border: none;
+    color: #263238;
+    background-color: rgba(0, 0, 0, 0);
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 6px 11px;
+    border-radius: 30px;
+    transition: 0.2s;
+    margin-top: 5px;
+}
+
+.closeButton:hover {
+    background-color: #eceff1;
+}

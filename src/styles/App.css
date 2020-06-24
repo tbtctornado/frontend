@@ -1,0 +1,328 @@
+:root {
+    --main: #48dbb4;
+    --blue: #0079ff;
+}
+
+body {
+    color: #263238;
+    background: #eceff1 radial-gradient(at 50% 55%, #d6dae0, #fff) no-repeat;
+    background-size: auto;
+    min-height: 100vh;
+}
+
+button {
+    display: block;
+    margin: 1em auto;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: 0;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.5em;
+}
+
+a {
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.App {
+    text-align: center;
+}
+
+.logo {
+    width: 430px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.page-wrapper {
+    max-width: 700px;
+    min-height: 340px;
+    margin: 0 auto;
+    padding: 30px 10px 20px 10px;
+    position: relative;
+    overflow-wrap: break-word;
+    background-color: white;
+    border-radius: 30px;
+}
+
+.page-selector-div {
+    text-align: center;
+    background-color: #eee;
+    border-radius: 100px;
+    max-width: 260px;
+    margin: 0 auto;
+    -webkit-box-shadow: inset 0px 0px 13px 0px rgba(230, 230, 230, 1);
+    -moz-box-shadow: inset 0px 0px 13px 0px rgba(230, 230, 230, 1);
+    box-shadow: inset 0px 0px 13px 0px rgba(230, 230, 230, 1);
+}
+
+
+.page-selector-div button {
+    display: inline-block;
+    margin: 0;
+    width: 50%;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bolder;
+    color: #606263;
+    border-radius: 100px;
+    border: none;
+    background-color: transparent;
+    transition: 0.1s;
+}
+
+.page-selector-div .unselected:hover {
+    background-color: #eee;
+}
+
+.page-selector-div .selected {
+    background-color: var(--main);
+    color: white;
+    border-color: var(--main);
+}
+
+.content-wrapper {
+    padding: 20px 10px 5px 10px;
+}
+
+
+/***  WITHDRAW PAGE ***/
+.withdraw-wrapper {
+    text-align: left;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.withdraw-wrapper label {
+    display: block;
+}
+
+.btc-recipient-label input {
+    width: 300px;
+}
+
+.withdraw-wrapper input {
+    padding: 10px 0px 10px 10px;
+    border-radius: 5px;
+    border: 1px solid #e1e1e2;
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    font-size: 17px;
+    color: inherit;
+    background-color: #f8f8f9;
+    -webkit-box-shadow: inset 0px 0px 12px 0px rgba(230, 230, 230, 0.59);
+    -moz-box-shadow: inset 0px 0px 12px 0px rgba(230, 230, 230, 0.59);
+    box-shadow: inset 0px 0px 12px 0px rgba(230, 230, 230, 0.59);
+}
+
+.withdraw-button {
+    margin-top: 43px;
+    margin-bottom: 0;
+    border-radius: 50px !important;
+}
+
+.withdrawal-info {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    padding-bottom: 20px;
+    color: #666667;
+}
+
+.successful-withdrawal {
+    margin: 30px auto;
+    color: #2dbb4d;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* DEPOSIT PAGE */
+.hover-button {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 17px;
+    transition: 0.2s;
+    border-radius: 3px;
+}
+
+.hover-button:hover {
+    background-color: black;
+    color: white;
+
+}
+
+.anonymity-size {
+    margin-top: 15px;
+    font-weight: 400;
+    color: #888889;
+    margin-bottom: 30px;
+    font-size: 19px;
+}
+
+.deposit-amounts-ul {
+    list-style: none;
+}
+
+.deposit-amounts-ul li {
+    display: inline-block;
+    margin: 0.5em 2em;
+}
+
+.deposit-amounts-ul li input {
+    display: inline-block !important;
+    width: 2em;
+}
+
+.deposit-info-div {
+    width: 90%;
+    max-width: 610px;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.deposit-info-div h3 {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    padding-top: 25px;
+    font-size: 20px;
+    text-align: center;
+    border-top: 2px solid #eeeeef;
+}
+
+.deposit-info-div p {
+    margin-top: 8px;
+    text-align: center;
+}
+
+.notestring {
+    padding: 13px;
+    background-color: #eeeeef;
+    border: 1px solid #e1e1e2;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+.deposit-headline {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/*** CUSTOM RADIO BUTTON ***/
+/* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    font-size: 19px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: 500;
+}
+
+.fee-name {
+    color: var(--main);
+    font-weight: 500;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.make-deposit-button {
+    margin-top: 40px;
+    border-radius: 50px;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 23px;
+    width: 23px;
+    background-color: #eee;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: var(--main);
+    border-color: var(--main);
+
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+    top: 6px;
+    left: 6px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #40b697;
+}
+
+.container input ~ .checkmark {
+    cursor: pointer;
+}
+
+/* do not allow to click on disabled radio buttons */
+.container input:disabled ~ .checkmark {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.container:hover input:disabled ~ .checkmark {
+    background-color: #cccccc66;
+}
+
+
+
+
+
