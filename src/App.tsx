@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import WithdrawPage from './components/WithdrawPage';
 import DepositPage from './components/DepositPage';
+import Footer from './components/Footer';
 import logo from './images/logo.svg';
 import './styles/App.css';
 import getWeb3 from './utils/getWeb3';
@@ -57,20 +58,23 @@ class App extends Component<{}, State> {
             pageContent = <DepositPage web3={this.state.web3} />;
         }
         return (
-            <div className="App">
-                <img src={logo} className="logo" alt="logo" />
-                <div className="page-wrapper">
-                    <div className="page-selector-div">
-                        <button className={depositButtonClasses} onClick={this.switchToDeposit}>
-                            Deposit
-                        </button>
-                        <button className={withdrawButtonClasses} onClick={this.switchToWithdraw}>
-                            Withdraw
-                        </button>
+            <>
+                <div className="App">
+                    <img src={logo} className="logo" alt="logo" />
+                    <div className="page-wrapper">
+                        <div className="page-selector-div">
+                            <button className={depositButtonClasses} onClick={this.switchToDeposit}>
+                                Deposit
+                            </button>
+                            <button className={withdrawButtonClasses} onClick={this.switchToWithdraw}>
+                                Withdraw
+                            </button>
+                        </div>
+                        <div className="content-wrapper">{pageContent}</div>
                     </div>
-                    <div className="content-wrapper">{pageContent}</div>
                 </div>
-            </div>
+                <Footer></Footer>
+            </>
         );
     }
 }

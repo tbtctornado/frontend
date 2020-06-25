@@ -80,7 +80,7 @@ class DepositPage extends Component<DepositPageProps, DepositPageState> {
 
         try {
             const web3 = this.props.web3;
-            const accountSelected = await web3.eth.getAccounts();
+            const accountSelected = await web3.eth.getAccounts(); // selected account in MetaMask
             const userAddress = accountSelected[0];
             const tbtcAmount = this.state.tbtcAmount;
             const tokenAddress = TOKEN_ADDRESS.ropsten;
@@ -214,7 +214,7 @@ class DepositPage extends Component<DepositPageProps, DepositPageState> {
                 <Modal modalClosed={this.closeModal} show={this.state.showModal}>
                     <h2>Insufficient balance</h2>
                     <p>
-                        You don't have enough TBTC tokens. You can get more TBTC{' '}
+                        You don't have enough TBTC tokens. You need {this.state.tbtcAmount} TBTC. You can get more TBTC{' '}
                         <a target="_blank" href="https://dapp.test.tbtc.network/deposit">
                             here
                         </a>

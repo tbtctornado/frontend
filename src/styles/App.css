@@ -1,6 +1,9 @@
 :root {
     --main: #48dbb4;
     --blue: #0079ff;
+    --grey: #859096;
+    --black: #263238;
+    --footer-height: 60px;
 }
 
 body {
@@ -321,6 +324,84 @@ a:hover {
 .container:hover input:disabled ~ .checkmark {
     background-color: #cccccc66;
 }
+
+/* FOOTER */
+
+.App {
+    min-height: calc(100vh - var(--footer-height));
+}
+
+.footer {
+    min-height: 100%;
+    width: 100%;
+    height: var(--footer-height);
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    display: block;
+    color: var(--grey);
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 220px;
+    /*padding: 10px;*/
+    height: 100%; /* Should be removed. Only for demonstration */
+}
+
+.column p{
+margin: 0;
+}
+
+.row {
+    display: block;
+    margin: 0 auto;
+    width: 660px;
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*.footer .icon {*/
+/*    max-width: 25px;*/
+/*    display: inline-block;*/
+/*}*/
+
+.footer a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: inherit;
+    transition: 0.1s;
+}
+
+.footer span {
+    vertical-align: super;
+}
+
+.footer svg {
+    margin-right: 5px;
+}
+
+.footer svg path {
+    fill: var(--grey) !important;
+    transition: 0.1s;
+}
+
+.footer a:hover{
+    color: var(--black);
+}
+
+.footer a:hover > svg path {
+    fill: var(--black) !important;
+}
+
+
 
 
 
