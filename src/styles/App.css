@@ -136,17 +136,33 @@ a:hover {
     border-radius: 50px !important;
 }
 
+.withdraw-button:disabled {
+    color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+.withdraw-button:disabled:hover {
+    color: #ccc;
+    border-color: #ccc;
+    background-color: white;
+}
+
 .withdrawal-info {
     text-align: center;
     font-size: 16px;
     font-weight: 300;
     padding-bottom: 20px;
     color: #666667;
+    margin-top: 40px;
+}
+
+.withdrawal-info div {
+    margin-top: 25px;
 }
 
 .successful-withdrawal {
     margin: 30px auto;
-    color: #2dbb4d;
+    color: #48dbb4;
     font-size: 18px;
     font-weight: 500;
 }

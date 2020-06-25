@@ -102,7 +102,11 @@ class WithdrawPage extends Component<WithdrawPageProps, WithdrawPageState> {
         let txSent = <></>;
 
         let withdrawButton = (
-            <button className="hover-button withdraw-button" onClick={this.withdrawHandler}>
+            <button
+                className="hover-button withdraw-button"
+                onClick={this.withdrawHandler}
+                disabled={this.state.ethAddress === '' || this.state.noteWithdraw === ''}
+            >
                 Withdraw
             </button>
         );
@@ -111,14 +115,14 @@ class WithdrawPage extends Component<WithdrawPageProps, WithdrawPageState> {
             withdrawButton = <Spinner></Spinner>;
             loadingInfo = <div>1. Generating proof...</div>;
             if (this.state.proofGenerated) {
-                sendingTx = <p>2. Sending transaction...</p>;
+                sendingTx = <div>2. Sending transaction...</div>;
             }
         }
 
         if (this.state.txSent) {
             txSent = (
                 <p className="successful-withdrawal">
-                    Everything OK!
+                    Success!
                     <span
                         style={{
                             color: '#666',
