@@ -4,7 +4,6 @@ import DepositPage from './components/DepositPage';
 import Footer from './components/Footer';
 import logo from './images/logo.svg';
 import './styles/App.css';
-import getWeb3 from './utils/getWeb3';
 
 // State interface
 interface State {
@@ -23,19 +22,6 @@ class App extends Component<{}, State> {
         };
     }
 
-    componentDidMount = async () => {
-        // get web3 injected by MetaMask
-        const web3: any = await getWeb3();
-
-        // Alert the user to choose Ropsten testnet
-        const networkId = await web3.eth.net.getId();
-        if (networkId !== 3) {
-            alert('Switch to Ropsten testnet');
-        }
-
-        this.setState({ web3 });
-    };
-
     switchToDeposit = () => {
         this.setState({ pageSelected: 'deposit' });
     };
@@ -52,10 +38,10 @@ class App extends Component<{}, State> {
 
         if (this.state.pageSelected === 'withdraw') {
             withdrawButtonClasses = 'selected';
-            pageContent = <WithdrawPage web3={this.state.web3} />;
+            pageContent = <WithdrawPage />;
         } else {
             depositButtonClasses = 'selected';
-            pageContent = <DepositPage web3={this.state.web3} />;
+            pageContent = <DepositPage />;
         }
         return (
             <>

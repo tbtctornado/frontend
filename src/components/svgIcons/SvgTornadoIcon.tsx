@@ -1,7 +1,6 @@
 import * as React from 'react';
 interface Props {
     fill: any;
-    class: any;
 }
 
 function SvgTornadoIcon(props: Props) {

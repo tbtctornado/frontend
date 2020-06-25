@@ -6,6 +6,7 @@ import { getAnonymitySetSize } from '../utils/axios-functions';
 import Spinner from './Spinner';
 import Modal from './Modal';
 import { tornadoABI } from '../contracts/tornadoABI';
+import Web3 from 'web3';
 
 interface DepositPageState {
     tbtcAmount: number; // the amount of TBTC which the user wants to send to Tornado
@@ -17,14 +18,18 @@ interface DepositPageState {
     showModal: boolean;
     sendingApprove: boolean;
     sendingDeposit: boolean;
-}
-
-interface DepositPageProps {
     web3: any;
 }
 
+declare global {
+    interface Window {
+        ethereum: any;
+        web3: any;
+    }
+}
+
 // pass props and State interface to Component class
-class DepositPage extends Component<DepositPageProps, DepositPageState> {
+class DepositPage extends Component<{}, DepositPageState> {
     constructor(props: any) {
         super(props);
 
@@ -38,11 +43,30 @@ class DepositPage extends Component<DepositPageProps, DepositPageState> {
             showModal: false,
             sendingApprove: false,
             sendingDeposit: false,
+            web3: null,
         };
     }
 
     componentDidMount = async () => {
         this.setAnonymitySetSize(this.state.tbtcAmount);
+    };
+
+    connectWallet = async () => {
+        // connects to MetaMask
+        if (window.ethereum) {
+            window.web3 = new Web3(window.ethereum);
+            await window.ethereum.enable();
+
+            // make sure Ropsten testnet is selected
+            const networkId = await window.web3.eth.net.getId();
+            if (networkId !== 3) {
+                alert('Switch to Ropsten testnet');
+            }
+
+            this.setState({ web3: window.web3 }, () => {
+                console.log('wallet connected');
+            });
+        }
     };
 
     // set the amount of BTC which the user wants to deposit
@@ -55,7 +79,7 @@ class DepositPage extends Component<DepositPageProps, DepositPageState> {
 
     getDepositTxData = async (btcAmount: number, commitment: string) => {
         const tornadoAddress = TORNADO_INSTANCES_ADDRESSES[NETWORK][btcAmount];
-        const tornadoContract = new this.props.web3.eth.Contract(tornadoABI, tornadoAddress);
+        const tornadoContract = new this.state.web3.eth.Contract(tornadoABI, tornadoAddress);
 
         return tornadoContract.methods.deposit(commitment).encodeABI();
     };
@@ -63,7 +87,7 @@ class DepositPage extends Component<DepositPageProps, DepositPageState> {
     getApproveTxData = async (btcAmount: number) => {
         // get TBTC contract instance
         const tokenAddress = TOKEN_ADDRESS[NETWORK];
-        const tokenInstance = new this.props.web3.eth.Contract(tokenABI, tokenAddress);
+        const tokenInstance = new this.state.web3.eth.Contract(tokenABI, tokenAddress);
         const tornadoAddress = TORNADO_INSTANCES_ADDRESSES[NETWORK][btcAmount];
 
         // get transaction data for approve() method called on TBTC token contract
@@ -79,7 +103,7 @@ class DepositPage extends Component<DepositPageProps, DepositPageState> {
         this.setState({ loading: true });
 
         try {
-            const web3 = this.props.web3;
+            const web3 = this.state.web3;
             const accountSelected = await web3.eth.getAccounts(); // selected account in MetaMask
             const userAddress = accountSelected[0];
             const tbtcAmount = this.state.tbtcAmount;
@@ -180,14 +204,23 @@ class DepositPage extends Component<DepositPageProps, DepositPageState> {
             );
         }
 
+        // DEPOSIT BUTTON
         let depositButton = (
-            <button className="make-deposit-button hover-button" onClick={this.makeDepositHandler}>
-                Deposit
+            <button className="make-deposit-button hover-button" onClick={this.connectWallet}>
+                Connect MetaMask
             </button>
         );
 
-        if (this.state.showDepositInfo) {
-            depositButton = <></>;
+        if (this.state.web3) {
+            if (this.state.showDepositInfo) {
+                depositButton = <></>;
+            } else {
+                depositButton = (
+                    <button className="make-deposit-button hover-button" onClick={this.makeDepositHandler}>
+                        Deposit
+                    </button>
+                );
+            }
         }
 
         let loadingApprove = <></>;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { generateProof, parseNote } from '../utils/snarks-functions';
-import { DEMO_PRIVATE_KEY, NETWORK, TORNADO_INSTANCES_ADDRESSES } from '../config';
+import { DEMO_PRIVATE_KEY, NETWORK, TORNADO_INSTANCES_ADDRESSES, RPC_URL } from '../config';
 import { tornadoABI } from '../contracts/tornadoABI';
 import Spinner from './Spinner';
+import Web3 from 'web3';
 
 interface WithdrawPageState {
     noteWithdraw: string;
@@ -10,13 +11,10 @@ interface WithdrawPageState {
     loading: boolean;
     proofGenerated: boolean;
     txSent: boolean;
-}
-
-interface WithdrawPageProps {
     web3: any;
 }
 
-class WithdrawPage extends Component<WithdrawPageProps, WithdrawPageState> {
+class WithdrawPage extends Component<{}, WithdrawPageState> {
     constructor(props: any) {
         super(props);
 
@@ -26,8 +24,15 @@ class WithdrawPage extends Component<WithdrawPageProps, WithdrawPageState> {
             loading: false,
             proofGenerated: false,
             txSent: false,
+            web3: null,
         };
     }
+
+    componentDidMount = async () => {
+        let provider = new Web3.providers.HttpProvider(RPC_URL);
+        const web3 = new Web3(provider);
+        this.setState({ web3 });
+    };
 
     handleChange = (event: any) => {
         // Handle change of input fields
@@ -53,7 +58,7 @@ class WithdrawPage extends Component<WithdrawPageProps, WithdrawPageState> {
 
             const refund: string = '0';
             const recipient = this.state.ethAddress;
-            const web3 = this.props.web3;
+            const web3 = this.state.web3;
             const { amount, deposit } = parseNote(this.state.noteWithdraw);
 
             const tornadoAddress = TORNADO_INSTANCES_ADDRESSES[NETWORK][amount];
@@ -121,21 +126,12 @@ class WithdrawPage extends Component<WithdrawPageProps, WithdrawPageState> {
 
         if (this.state.txSent) {
             txSent = (
-                <p className="successful-withdrawal">
-                    Success!
-                    <span
-                        style={{
-                            color: '#666',
-                            fontWeight: 'normal',
-                            display: 'block',
-                            fontSize: '16px',
-                            margin: '30px auto 0 auto',
-                            lineHeight: '25px',
-                        }}
-                    >
-                        TBTC tokens were sent to: <br /> <b>{this.state.ethAddress}</b>
-                    </span>
-                </p>
+                <div className="successful-withdrawal">
+                    <p className="withdraw-success-message">Success!</p>
+                    <p className="withdraw-sent-message">TBTC tokens were sent to:</p>
+                    <br />
+                    <b>{this.state.ethAddress}</b>
+                </div>
             );
         }
 

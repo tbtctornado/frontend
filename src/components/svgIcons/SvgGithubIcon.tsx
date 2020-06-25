@@ -2,7 +2,6 @@ import React from 'react';
 
 interface Props {
     fill: any;
-    class: any;
 }
 
 function SvgGithubIcon(props: Props) {

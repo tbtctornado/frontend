@@ -2,7 +2,6 @@ import * as React from 'react';
 
 interface Props {
     fill: any;
-    class: any;
 }
 
 function SvgTbtcIcon(props: Props) {

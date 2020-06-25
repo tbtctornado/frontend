@@ -43,9 +43,9 @@ a:hover {
 }
 
 .logo {
-    width: 430px;
+    width: 410px;
     margin-top: 35px;
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 
 .page-wrapper {
@@ -141,6 +141,7 @@ a:hover {
     border-color: #ccc;
     cursor: not-allowed;
 }
+
 .withdraw-button:disabled:hover {
     color: #ccc;
     border-color: #ccc;
@@ -162,9 +163,21 @@ a:hover {
 
 .successful-withdrawal {
     margin: 30px auto;
+}
+
+.withdraw-success-message {
     color: #48dbb4;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
+}
+
+.withdraw-sent-message {
+    color: #666;
+    font-weight: normal;
+    display: block;
+    font-size: 16px;
+    margin: 30px auto 0 auto;
+    line-height: 5px;
 }
 
 /* DEPOSIT PAGE */
@@ -367,8 +380,8 @@ a:hover {
     height: 100%; /* Should be removed. Only for demonstration */
 }
 
-.column p{
-margin: 0;
+.column p {
+    margin: 0;
 }
 
 .row {
@@ -376,6 +389,7 @@ margin: 0;
     margin: 0 auto;
     width: 660px;
 }
+
 /* Clear floats after the columns */
 .row:after {
     content: "";
@@ -409,7 +423,7 @@ margin: 0;
     transition: 0.1s;
 }
 
-.footer a:hover{
+.footer a:hover {
     color: var(--black);
 }
 
