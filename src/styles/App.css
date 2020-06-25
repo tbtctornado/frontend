@@ -158,7 +158,7 @@ a:hover {
 }
 
 .withdrawal-info div {
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .successful-withdrawal {
@@ -166,7 +166,7 @@ a:hover {
 }
 
 .withdraw-success-message {
-    color: #48dbb4;
+    color: #34caa2;
     font-size: 20px;
     font-weight: 500;
 }
@@ -201,7 +201,7 @@ a:hover {
 .anonymity-size {
     margin-top: 15px;
     font-weight: 400;
-    color: #888889;
+    color: #89919e;
     margin-bottom: 30px;
     font-size: 19px;
 }
@@ -234,6 +234,8 @@ a:hover {
     font-size: 20px;
     text-align: center;
     border-top: 2px solid #eeeeef;
+    font-weight: 500;
+    color: #34caa2;
 }
 
 .deposit-info-div p {
@@ -255,6 +257,11 @@ a:hover {
 .deposit-headline {
     margin-bottom: 30px;
     font-size: 18px;
+}
+
+.sending-tx-label {
+    font-size: 16px;
+    font-weight: 300;
 }
 
 /*** CUSTOM RADIO BUTTON ***/

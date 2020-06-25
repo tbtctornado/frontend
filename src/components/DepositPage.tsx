@@ -227,7 +227,7 @@ class DepositPage extends Component<{}, DepositPageState> {
         if (this.state.sendingApprove) {
             loadingApprove = (
                 <div>
-                    <p>Sending approve transaction...</p>
+                    <p className="sending-tx-label">Sending approve transaction...</p>
                 </div>
             );
         }
@@ -236,7 +236,7 @@ class DepositPage extends Component<{}, DepositPageState> {
         if (this.state.sendingDeposit) {
             loadingDeposit = (
                 <div>
-                    <p>Sending deposit transaction...</p>
+                    <p className="sending-tx-label">Sending deposit transaction...</p>
                 </div>
             );
         }
