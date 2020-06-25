@@ -24,7 +24,7 @@ const getAnonymitySetSize = async (btcAmount: number) => {
     } catch (error) {
         console.log('Error while requesting anonymity set size');
         console.log(error);
-        return 0;
+        return -1;
     }
 };
 

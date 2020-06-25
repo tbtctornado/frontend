@@ -66,6 +66,8 @@ class DepositPage extends Component<{}, DepositPageState> {
             this.setState({ web3: window.web3 }, () => {
                 console.log('wallet connected');
             });
+        } else {
+            alert('Install MetaMask if you want to deposit to TBTC Tornado');
         }
     };
 
@@ -263,7 +265,8 @@ class DepositPage extends Component<{}, DepositPageState> {
 
                 {amountOptions}
                 <h3 className="anonymity-size">
-                    Anonymity set size: <b>{this.state.anonymitySetSize}</b>
+                    Anonymity set size:{' '}
+                    {this.state.anonymitySetSize === -1 ? <>Loading...</> : <b>{this.state.anonymitySetSize}</b>}
                 </h3>
 
                 {depositInfo}
