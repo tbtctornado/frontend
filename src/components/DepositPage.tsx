@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DEPOSIT_AMOUNTS, NETWORK, TOKEN_ADDRESS, TORNADO_INSTANCES_ADDRESSES } from '../config';
+import { DEPOSIT_AMOUNTS, NETWORK, TOKEN_ADDRESS, TORNADO_INSTANCES_ADDRESSES, AMOUNTS_DISABLED } from '../config';
 import { tokenABI } from '../contracts/tokenABI';
 import { getNoteStringAndCommitment } from '../utils/snarks-functions';
 import { getAnonymitySetSize } from '../utils/axios-functions';
@@ -143,7 +143,7 @@ class DepositPage extends Component<{}, DepositPageState> {
             this.setState({ sendingDeposit: true });
 
             const { noteString, commitment } = getNoteStringAndCommitment(
-                'pbtc',
+                'tbtc',
                 tbtcAmount,
                 await web3.eth.net.getId(),
             );
@@ -185,7 +185,7 @@ class DepositPage extends Component<{}, DepositPageState> {
                                 id={index.toString()}
                                 value={amount}
                                 onChange={() => this.setBtcAmountHandler(amount)}
-                                // disabled={this.state.loading || AMOUNTS_DISABLED.includes(amount)} // don't allow the user to change TBTC amount while transactions are being provessed
+                                disabled={this.state.loading || AMOUNTS_DISABLED.includes(amount)} // don't allow the user to change TBTC amount while transactions are being provessed
                             />
                             <span className="checkmark" />
                         </label>
@@ -209,7 +209,7 @@ class DepositPage extends Component<{}, DepositPageState> {
         // DEPOSIT BUTTON
         let depositButton = (
             <button className="make-deposit-button hover-button" onClick={this.connectWallet}>
-                Connect MetaMask
+                Connect to a wallet
             </button>
         );
 

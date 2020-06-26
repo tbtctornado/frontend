@@ -16,7 +16,7 @@ const TORNADO_INSTANCES_ADDRESSES: any = {
 const DEPOSIT_AMOUNTS: number[] = Object.keys(TORNADO_INSTANCES_ADDRESSES[NETWORK]).sort().map(Number);
 
 // Do not allow the user to choose the following amounts
-const AMOUNTS_DISABLED: number[] = [0.01, 0.1];
+const AMOUNTS_DISABLED: number[] = [];
 
 const TOKEN_ADDRESS = {
     ropsten: '0xEB770B1883Dcce11781649E8c4F1ac5F4B40C978',

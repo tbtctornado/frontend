@@ -10,7 +10,7 @@ const Footer = () => {
                 <div className="column">
                     <a href="https://tbtc.network/" target="_blank">
                         <SvgTbtcIcon fill="#859096" />
-                        <span>TBTC token</span>
+                        <span>TBTC network</span>
                     </a>
                 </div>
                 <div className="column">
