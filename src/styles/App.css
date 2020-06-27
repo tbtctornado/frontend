@@ -165,10 +165,18 @@ a:hover {
     margin: 30px auto;
 }
 
-.withdraw-success-message {
-    color: #34caa2;
+.withdraw-error-message, withdraw-success-message {
     font-size: 20px;
     font-weight: 500;
+}
+
+.withdraw-success-message {
+    color: #34caa2;
+}
+
+.withdraw-error-message {
+    color: #e00d0d;
+    margin-bottom: 10px;
 }
 
 .withdraw-sent-message {

@@ -11,6 +11,7 @@ interface WithdrawPageState {
     loading: boolean;
     proofGenerated: boolean;
     txSent: boolean;
+    error: boolean;
     web3: any;
 }
 
@@ -24,6 +25,7 @@ class WithdrawPage extends Component<{}, WithdrawPageState> {
             loading: false,
             proofGenerated: false,
             txSent: false,
+            error: false,
             web3: null,
         };
     }
@@ -52,32 +54,26 @@ class WithdrawPage extends Component<{}, WithdrawPageState> {
      * Do an ETH withdrawal
      */
     withdrawHandler = async () => {
-        this.setState({ loading: true, txSent: false });
+        this.setState({ loading: true, txSent: false, error: false });
         try {
-            console.log('Generating proof...');
-
             const refund: string = '0';
             const recipient = this.state.ethAddress;
             const web3 = this.state.web3;
             const { amount, deposit } = parseNote(this.state.noteWithdraw);
-
             const tornadoAddress = TORNADO_INSTANCES_ADDRESSES[NETWORK][amount];
-
             const tornado = new web3.eth.Contract(tornadoABI, tornadoAddress);
-
-            const { proof, args } = await generateProof({ deposit, recipient, refund, tornado });
-            args[2] = recipient;
-
-            this.setState({ proofGenerated: true });
-
-            // private key for demo purposes only
-            const senderPrivateKey = DEMO_PRIVATE_KEY;
+            const senderPrivateKey = DEMO_PRIVATE_KEY; // private key for demo purposes only
             const accountSender = web3.eth.accounts.privateKeyToAccount(senderPrivateKey);
 
+            // generate the proof
+            console.log('Generating proof...');
+            const { proof, args } = await generateProof({ deposit, recipient, refund, tornado });
+            this.setState({ proofGenerated: true });
+
+            // sign and send withdraw transaction
+            console.log('Signing and sending withdraw transaction...');
             const nonce = await web3.eth.getTransactionCount(accountSender.address);
             const txData = await tornado.methods.withdraw(proof, ...args).encodeABI();
-
-            // sing the transaction with user's private key
             const txSigned = await web3.eth.accounts.signTransaction(
                 {
                     nonce: nonce,
@@ -90,14 +86,13 @@ class WithdrawPage extends Component<{}, WithdrawPageState> {
                 '0x' + senderPrivateKey,
             );
 
-            console.log('Submitting withdraw transaction');
-
             await web3.eth.sendSignedTransaction(txSigned.rawTransaction);
+            console.log('SUCCESS! Withdraw transaction sent');
+            this.setState({ loading: false, proofGenerated: false, txSent: true, noteWithdraw: '', error: true });
         } catch (e) {
-            console.log('transaction not sent');
+            console.log('ERROR: Withdraw transaction not sent', e);
+            this.setState({ loading: false, proofGenerated: false, txSent: false, error: true });
         }
-
-        this.setState({ loading: false, proofGenerated: false, txSent: true, noteWithdraw: '' });
     };
 
     render() {
@@ -124,13 +119,22 @@ class WithdrawPage extends Component<{}, WithdrawPageState> {
             }
         }
 
-        if (this.state.txSent) {
+        if (this.state.txSent && !this.state.error) {
             txSent = (
                 <div className="successful-withdrawal">
                     <p className="withdraw-success-message">Success!</p>
                     <p className="withdraw-sent-message">TBTC tokens were sent to:</p>
                     <br />
                     <b>{this.state.ethAddress}</b>
+                </div>
+            );
+        }
+
+        if (this.state.error) {
+            txSent = (
+                <div className="successful-withdrawal">
+                    <p className="withdraw-error-message">Something went wrong :(</p>
+                    <span>Check console for more information</span>
                 </div>
             );
         }

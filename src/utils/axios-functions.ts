@@ -1,6 +1,6 @@
 // server configuration
 import axios from 'axios';
-import { NETWORK, THE_GRAPH_URL, TORNADO_INSTANCES_ADDRESSES } from '../config';
+import { NETWORK, THE_GRAPH_URL, SERVER_URL, TORNADO_INSTANCES_ADDRESSES } from '../config';
 
 const getAnonymitySetSize = async (btcAmount: number) => {
     // convert the address to lowercase, otherwise it won't work
@@ -28,4 +28,11 @@ const getAnonymitySetSize = async (btcAmount: number) => {
     }
 };
 
-export { getAnonymitySetSize };
+const getProvingKey = async () => {
+    const reponse = await axios.get(`${SERVER_URL}/provingKey`, {
+        responseType: 'arraybuffer',
+    });
+    return reponse.data;
+};
+
+export { getAnonymitySetSize, getProvingKey };

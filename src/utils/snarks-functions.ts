@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { tornadoABI } from '../contracts/tornadoABI';
+import { getProvingKey } from './axios-functions';
 
 const randomBytes = require('crypto').randomBytes;
 const circomlib = require('circomlib');
@@ -10,7 +9,7 @@ const websnarkUtils = require('websnark/src/utils');
 const merkleTree = require('../lib/MerkleTree');
 const rbigint = (nbytes: number) => bigInt.leBuff2int(randomBytes(nbytes));
 const MERKLE_TREE_HEIGHT = 20;
-let tornado;
+
 // Compute pedersen hash
 const pedersenHash = (data: object) => circomlib.babyJub.unpackPoint(circomlib.pedersenHash.hash(data))[0];
 
@@ -87,12 +86,11 @@ const generateProof = async ({ deposit, recipient, relayerAddress = 0, fee = 0, 
     const circuit = require('../circuits/withdraw.json');
 
     // get proving key
-    const reponse = await axios.get(`http://192.168.1.14:5000/provingKey`, {
-        responseType: 'arraybuffer',
-    });
-    let proving_key = reponse.data;
-
+    let proving_key = await getProvingKey();
+    console.log('proving_key loaded');
     console.log('proving_key', proving_key);
+
+    // generate proof data
     const proofData = await websnarkUtils.genWitnessAndProve(groth16, input, circuit, proving_key);
     const { proof } = websnarkUtils.toSolidityInput(proofData);
     console.timeEnd('Proof time');

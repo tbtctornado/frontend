@@ -33,6 +33,8 @@ const THE_GRAPH_URL = 'https://api.thegraph.com/subgraphs/name/benesjan/btc-torn
 
 const RELAYER_URL = 'http://127.0.0.1:8000';
 
+const SERVER_URL = 'http://192.168.1.14:5000';
+
 export {
     RPC_URL,
     DEPOSIT_AMOUNTS,
@@ -42,6 +44,7 @@ export {
     NETWORK,
     THE_GRAPH_URL,
     RELAYER_URL,
+    SERVER_URL,
     AMOUNTS_DISABLED,
     DEMO_PRIVATE_KEY,
 };
