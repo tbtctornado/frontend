@@ -3,8 +3,8 @@ This project was built during the [Protect Privacy hackathon](https://gitcoin.co
 
 It is a [TBTC token](https://tbtc.network) mixer which uses [tornado.cash](https://github.com/tornadocash)  smart contracts under the hood. 
 
-### Demo
-The project is available at: http://btctornado.cash/ 
+## Demo
+Live project on ropsten testnet: http://btctornado.cash.
 
 Demo video: https://www.youtube.com/watch?v=kACj6qjLhcE
 
