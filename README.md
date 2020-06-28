@@ -1,4 +1,13 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## TBTC Tornado
+This project was built during the [Protect Privacy hackathon](https://gitcoin.co/issue/keep-network/Protect-Privacy-Hackathon/1/4457).  
+
+It is a [TBTC token](https://tbtc.network) mixer which uses [tornado.cash](https://github.com/tornadocash)  smart contracts under the hood. 
+
+### Demo
+The project is available at: http://btctornado.cash/ 
+
+Demo video: https://www.youtube.com/watch?v=kACj6qjLhcE
+
 
 ## Available Scripts
 
