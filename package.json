@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "circomlib": "git+https://github.com/tornadocash/circomlib.git#c372f14d324d57339c88451834bf2824e73bbdbc",
     "ethers": "^4.0.47",
+    "keccak256": "^1.0.0",
     "ptokens": "^0.4.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

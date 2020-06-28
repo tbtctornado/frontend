@@ -56,9 +56,9 @@ class WithdrawPage extends Component<{}, WithdrawPageState> {
     withdrawHandler = async () => {
         this.setState({ loading: true, txSent: false, error: false });
         try {
+            const web3 = this.state.web3;
             const refund: string = '0';
             const recipient = this.state.ethAddress;
-            const web3 = this.state.web3;
             const { amount, deposit } = parseNote(this.state.noteWithdraw);
             const tornadoAddress = TORNADO_INSTANCES_ADDRESSES[NETWORK][amount];
             const tornado = new web3.eth.Contract(tornadoABI, tornadoAddress);
@@ -67,7 +67,8 @@ class WithdrawPage extends Component<{}, WithdrawPageState> {
 
             // generate the proof
             console.log('Generating proof...');
-            const { proof, args } = await generateProof({ deposit, recipient, refund, tornado });
+            let { proof, args } = await generateProof({ deposit, recipient, refund, tornado });
+
             this.setState({ proofGenerated: true });
 
             // sign and send withdraw transaction
@@ -86,9 +87,9 @@ class WithdrawPage extends Component<{}, WithdrawPageState> {
                 '0x' + senderPrivateKey,
             );
 
-            await web3.eth.sendSignedTransaction(txSigned.rawTransaction);
-            console.log('SUCCESS! Withdraw transaction sent');
-            this.setState({ loading: false, proofGenerated: false, txSent: true, noteWithdraw: '', error: true });
+            let receipt = await web3.eth.sendSignedTransaction(txSigned.rawTransaction);
+            console.log('SUCCESS! Withdraw transaction sent', receipt);
+            this.setState({ loading: false, proofGenerated: false, txSent: true, noteWithdraw: '', error: false });
         } catch (e) {
             console.log('ERROR: Withdraw transaction not sent', e);
             this.setState({ loading: false, proofGenerated: false, txSent: false, error: true });

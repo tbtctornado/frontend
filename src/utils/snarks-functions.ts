@@ -9,6 +9,7 @@ const websnarkUtils = require('websnark/src/utils');
 const merkleTree = require('../lib/MerkleTree');
 const rbigint = (nbytes: number) => bigInt.leBuff2int(randomBytes(nbytes));
 const MERKLE_TREE_HEIGHT = 20;
+const keccak256 = require('keccak256');
 
 // Compute pedersen hash
 const pedersenHash = (data: object) => circomlib.babyJub.unpackPoint(circomlib.pedersenHash.hash(data))[0];
@@ -67,7 +68,7 @@ const generateProof = async ({ deposit, recipient, relayerAddress = 0, fee = 0, 
         // Public snark inputs
         root: root,
         nullifierHash: deposit.nullifierHash,
-        recipient: 0,
+        recipient: bigInt(recipient),
         relayer: bigInt(relayerAddress),
         fee: bigInt(fee),
         refund: bigInt(refund),
@@ -88,14 +89,11 @@ const generateProof = async ({ deposit, recipient, relayerAddress = 0, fee = 0, 
     // get proving key
     let proving_key = await getProvingKey();
     console.log('proving_key loaded');
-    console.log('proving_key', proving_key);
 
     // generate proof data
     const proofData = await websnarkUtils.genWitnessAndProve(groth16, input, circuit, proving_key);
     const { proof } = websnarkUtils.toSolidityInput(proofData);
-    console.timeEnd('Proof time');
-
-    console.log('Proof generated');
+    console.timeEnd('Proof generated. Proof time');
 
     const args = [
         toHex(input.root),

@@ -35,9 +35,9 @@ const tornadoABI: AbiItem[] = [
                 type: 'bytes32',
             },
             {
-                internalType: 'string',
-                name: '_btcRecipient',
-                type: 'string',
+                internalType: 'address payable',
+                name: '_recipient',
+                type: 'address',
             },
             {
                 internalType: 'address payable',

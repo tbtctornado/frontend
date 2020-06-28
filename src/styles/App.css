@@ -165,7 +165,7 @@ a:hover {
     margin: 30px auto;
 }
 
-.withdraw-error-message, withdraw-success-message {
+.withdraw-error-message, .withdraw-success-message {
     font-size: 20px;
     font-weight: 500;
 }
