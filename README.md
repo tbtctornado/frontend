@@ -1,53 +1,50 @@
 ## TBTC Tornado
-This project was built during the [Protect Privacy hackathon](https://gitcoin.co/issue/keep-network/Protect-Privacy-Hackathon/1/4457).  
 
-It is a [TBTC token](https://tbtc.network) mixer which uses [tornado.cash](https://github.com/tornadocash)  smart contracts under the hood. 
+This project was built during the [Protect Privacy hackathon](https://gitcoin.co/issue/keep-network/Protect-Privacy-Hackathon/1/4457).
+
+It is a [TBTC token](https://tbtc.network) mixer which uses [tornado.cash](https://github.com/tornadocash) smart contracts under the hood.
 
 ## Demo
-Live project on ropsten testnet: http://btctornado.cash
+
+[comment]: <> (Live project on ropsten testnet: http://btctornado.cash)
 
 Demo video: https://www.youtube.com/watch?v=kACj6qjLhcE
 
+## Run in the browser
 
-## Available Scripts
+1. Clone the project:
 
-In the project directory, you can run:
+    ```bash
+    git clone https://github.com/tbtctornado/frontend.git
+    ```
 
-### `yarn start`
+2. Enter the directory and install the dependencies:
+    ```bash
+    cd frontend
+    npm install
+    ```
+3. Run the project and open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    ```bash
+    npm run start
+    ```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Error Note**: If you get an error message saying:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```bash
+Module not found: Can't resolve 'worker_threads'
+```
 
-### `yarn test`
+then go to the **./node_modules/websnark/src/groth16.js** file and comment the line where **NodeWorker** is initialized - like in the following example. Then run the project again.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```javascript
+if (!inBrowser) {
+    // NodeWorker = require("worker_threads").Worker;
+    NodeCrypto = require('crypto');
+}
+```
 
-### `yarn build`
+## Get in touch
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Join our [Telegram](https://t.me/joinchat/SyRsTU1ruK8YRXAjypaJ8Q) group!
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+We will answer all questions about the project or help you with building tornado mixer for your own token. Or just come to say hello!
